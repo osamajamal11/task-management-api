@@ -8,11 +8,20 @@ function GetUserById(id){
     return user
 }
 function CreateUser(data){
-    let user = {nextId , ...data}
+    let user = {id: nextId , ...data}
     users.push(user)
+    nextId++;
     return user
 }
 function UpdateUser(id , data){
+    let user = users.find(user => {return Number(id) === user.id})
+    if(user){
+        user.name = data.name
+        user.email = data.email
+    }
+    return user
+}
+function UpdateUserPartially(id , data){
     let user = users.find(user => {return Number(id) === user.id})
     if(user){
         if(data.name !== undefined) user.name = data.name
@@ -29,4 +38,4 @@ function DeleteUser(id){
 
 }
 
-export { GetUsers , GetUserById , CreateUser , UpdateUser , DeleteUser  }
+export { GetUsers , GetUserById , CreateUser , UpdateUser , UpdateUserPartially , DeleteUser  }

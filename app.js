@@ -10,6 +10,7 @@ app.use("/tasks" , taskRoute)
 app.use("/users" , userRoute)
 
 
-let port = 5000
+
+let port = 3000
 app.listen(port , () => {console.log(`stared server on port ${port}`)})
 
