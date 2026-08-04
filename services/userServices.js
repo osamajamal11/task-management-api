@@ -15,7 +15,7 @@ function GetUserById(id){
         setTimeout(() => {
         let user = users.find(user => {return Number(id) === user.id})
         if(!user){
-             reject( new AppError("user doesnt exist" , 404))
+            return reject( new AppError("user doesnt exist" , 404))
         }
          resolve(user)} , 1000)
     })
@@ -36,7 +36,7 @@ function UpdateUser(id , data){
         setTimeout(() => {
             let user = users.find(user => {return Number(id) === user.id})
             if(!user){
-               reject (new AppError("User doesnt Exist" , 404))
+               return reject (new AppError("User doesnt Exist" , 404))
             }
              user.email = data.email
              user.name = data.name
@@ -50,7 +50,7 @@ function UpdateUserPartially(id , data){
         setTimeout(() => {
             let user = users.find(user => {return Number(id) === user.id})
             if(!user){
-                 reject( new AppError("User doesnt Exist" , 404))
+                return reject( new AppError("User doesnt Exist" , 404))
             }
             if(data.name !== undefined) user.name = data.name
             if(data.email !== undefined) user.email = data.email
@@ -62,7 +62,7 @@ function DeleteUser(id){
     return new Promise((resolve , reject ) => {
         setTimeout(() => {
             const index = users.findIndex( user => { return  user.id === Number(id) } )
-            if(index === -1) reject (new AppError("User doesnt Exist" , 404))
+            if(index === -1) return reject (new AppError("User doesnt Exist" , 404))
             let user = users.splice(index , 1)[0]
             resolve(user)
         } , 1000)
