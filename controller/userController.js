@@ -1,30 +1,63 @@
 import {GetUsers , GetUserById , CreateUser , UpdateUser , UpdateUserPartially , DeleteUser} from "../services/userServices.js"
 
-const getUsers = (req , res) => {
-    let users = GetUsers();
-    res.json(users)
+const getUsers = async (req , res , next) => {
+    try{
+        let allUsers  = await GetUsers();
+        res.json(allUsers )
+    }
+    catch(error){
+        next(error)
+    }
+
+    
 }
 
-const getUserById = (req , res) => {
-    let user = GetUserById(req.params.id)
-    res.json(user)
+const getUserById = async (req , res , next) => {
+    try{
+        let user = await GetUserById(req.params.id)
+        res.json(user)
+    }
+     catch(error){
+        next(error)
+    }
 }
 
-const createUser = (req , res) => {
-    let user = CreateUser(req.body)
-    res.status(201).json(user)
+const createUser = async (req , res , next) => {
+    try{
+        let user = await CreateUser(req.body)
+        res.status(201).json(user)
+    }
+     catch(error){
+        next(error)
+    }
 }
-const updateUser = (req , res) => {
-    let user = UpdateUser(req.params.id , req.body)
-    res.json(user)
+const updateUser = async (req , res , next) => {
+    try{
+        let user = await UpdateUser(req.params.id , req.body)
+        res.json(user)
+    }
+     catch(error){
+        next(error)
+    }
 }
-const updateUserPartially = (req , res) => {
-    let user = UpdateUserPartially(req.params.id , req.body)
-    res.json(user)
+const updateUserPartially = async(req , res , next) => {
+    try{
+        let user = await UpdateUserPartially(req.params.id , req.body)
+        res.json(user)
+    }
+     catch(error){
+        next(error)
+    }
 }
-const deleteUser = (req , res) => {
-    let user = DeleteUser(req.params.id)
-    res.status(204).send()
+const deleteUser = async (req , res , next) => {
+    try{
+        let user = await DeleteUser(req.params.id)
+        res.status(204).send()
+    }
+    
+     catch(error){
+        next(error)
+    }
 }
 
 export { getUsers , getUserById , createUser , updateUser , updateUserPartially , deleteUser}

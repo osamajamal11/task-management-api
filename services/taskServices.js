@@ -7,6 +7,19 @@ function GetTasks(){
     return tasks;
 }
 
+function findTaskById(id){
+    return new Promise((resolve , reject) => {
+
+        setTimeout(() => {
+            let task = tasks.find(task => task.id === Number(id))
+            if(!task){
+                reject("Doesn't Exist")
+            }
+            else { resolve(task) }
+
+        } , 1000)
+    })
+}
 function GetTaskById(id){
     let task = tasks.find( task => {return task.id === Number(id)} );
     if(!task){
